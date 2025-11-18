@@ -1,4 +1,4 @@
-package com.imt.raytracing;
+package com.imt.raytracing.geometry;
 
 public class Point extends AbstractVec3 {
 

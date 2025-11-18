@@ -1,6 +1,9 @@
 package com.imt.raytracing;
 
 import org.junit.jupiter.api.Test;
+
+import com.imt.raytracing.imaging.Color;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ColorTest {

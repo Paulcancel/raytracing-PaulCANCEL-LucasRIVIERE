@@ -1,4 +1,6 @@
-package com.imt.raytracing;
+package com.imt.raytracing.imaging;
+
+import com.imt.raytracing.geometry.AbstractVec3;
 
 public class Color extends AbstractVec3 {
 
