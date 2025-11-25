@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.imt.raytracing.geometry.Intersection;
-import com.imt.raytracing.geometry.shape.Shape;
 import com.imt.raytracing.geometry.shape.Sphere;
 import com.imt.raytracing.imaging.Color;
 import com.imt.raytracing.raytracer.Camera;
