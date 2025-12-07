@@ -71,7 +71,6 @@ public class RendererTest {
 
     private Renderer renderer;
     private TestScene scene;
-    private TestRayTracer rt;
     
     private static final int WIDTH = 2;
     private static final int HEIGHT = 3;
@@ -83,8 +82,6 @@ public class RendererTest {
         // to rely on the side effects logged by our TestRayTracer stub.
         renderer = new Renderer();
         scene = new TestScene(WIDTH, HEIGHT);
-        // Note: The real Renderer instantiates a real RayTracer. 
-        // We will test the interaction based on the final output image color data.
     }
 
     @Test

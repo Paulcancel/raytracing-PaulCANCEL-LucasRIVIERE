@@ -21,7 +21,7 @@ public class DirectionalLightTest {
     @BeforeEach
     void setUp() {
         testColor = new Color(1.0, 0.9, 0.8);
-        testDirection = new Vector(1.0, -2.0, 0.5).normalize(); // Ensure it's unit length
+        testDirection = new Vector(1.0, -2.0, 0.5).normalize(); 
     }
 
     @Test
@@ -46,10 +46,6 @@ public class DirectionalLightTest {
         Vector unnormalizedDirection = new Vector(10.0, 0.0, 0.0);
         DirectionalLight light = new DirectionalLight(unnormalizedDirection, testColor);
         
-        // The DirectionalLight class does NOT automatically normalize the direction 
-        // in its constructor (it should rely on the input being normalized, or normalize it 
-        // later in the shading code, or normalize it here if that's the design choice).
-        // Based on the provided code, it stores the vector as is.
         
         // We verify that the stored vector still has its original, non-unit length
         assertEquals(10.0, light.direction.length(), EPSILON, 

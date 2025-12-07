@@ -19,16 +19,16 @@ import com.imt.raytracing.raytracer.light.PointLight;
 
 
 class TestShape extends Sphere {
-    // Simule une Sphere très simple pour passer le test 'instanceof Sphere'
+    // Simulates a very simple Sphere to pass the 'instanceof Sphere' test
     public TestShape(Color d, Color s, double sh) {
-        // Le centre et le rayon n'ont pas d'importance ici
+        // The center and radius don't matter here
         super(new Point(0, 0, 0), 1.0, d, s, sh); 
     }
     
-    // Le test d'ombre utilisera le Point et le Rayon du hit.
+    // The shadow test will use the Point and Ray from the hit.
     @Override
     public Optional<Intersection> intersect(Ray ray) {
-        // Intersect est utilisé dans Scene.closestIntersection, donc on peut le laisser tel quel
+        // Intersect is used in Scene.closestIntersection, so we can leave it as is
         return Optional.empty(); 
     }
 }
@@ -116,8 +116,6 @@ public class IntersectionTest {
     }
 
     // --- Shadow Tests (isShadowed) ---
-
-    // Note: The epsilon used for the shadow ray start point is 1e-4
 
     @Test
     void testIsShadowed_DirectionalLight_NoBlocker() {
