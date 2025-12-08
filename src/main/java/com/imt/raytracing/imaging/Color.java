@@ -75,4 +75,14 @@ public class Color extends AbstractVec3 {
     public String toString() {
         return String.format("Color(r=%.3f, g=%.3f, b=%.3f)", x, y, z);
     }
+
+    public boolean isBlack() {
+        return x == 0 && y == 0 && z == 0;
+    }
+
+    public void addLocal(Color c) {
+        this.x += c.x;
+        this.y += c.y;
+        this.z += c.z;
+    }
 }

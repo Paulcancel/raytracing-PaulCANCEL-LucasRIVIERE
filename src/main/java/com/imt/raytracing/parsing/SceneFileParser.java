@@ -69,6 +69,9 @@ public class SceneFileParser {
                             Double.parseDouble(tok[10])
                         );
                         break;
+                    case "maxdepth":
+                        scene.maxdepth = Integer.parseInt(tok[1]);
+                        break;
                     case "ambient":
                         // Set the global ambient light color
                         scene.ambient = new Color(Double.parseDouble(tok[1]), Double.parseDouble(tok[2]), Double.parseDouble(tok[3]));

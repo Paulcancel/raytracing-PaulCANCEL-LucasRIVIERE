@@ -29,6 +29,7 @@ public class Scene {
     public int height;
     public Camera camera;
     public String output = "img/jalon3/output.png";
+    public int maxdepth = 1;
     
     // --- Lighting & Geometry ---
     public Color ambient = new Color();

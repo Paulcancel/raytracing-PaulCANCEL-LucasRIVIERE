@@ -62,6 +62,6 @@ public class RayTracer {
             return new Color(0,0,0);
 
         // If the ray hits an object, calculate the final color using the shading model
-        return inter.get().shade(scene);
+        return inter.get().shade(scene, 0);
     }
 }

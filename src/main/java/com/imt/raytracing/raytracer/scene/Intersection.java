@@ -60,6 +60,10 @@ public class Intersection {
         else {
             throw new RuntimeException("Unknown Shape encountered during Intersection calculation.");
         }
+
+        if (this.normal.dot(incomingRay.direction) > 0) {
+            this.normal = this.normal.mul(-1);
+        }
     }
 
     /** * Checks if the intersection point is in shadow with respect to a specific light source. 
@@ -73,9 +77,8 @@ public class Intersection {
         Vector L; // Vector pointing *to* the light source
         double maxDist = Double.POSITIVE_INFINITY;
 
-        if (light instanceof DirectionalLight dl) {
-            // Light direction is constant and goes towards the light source (inverse of light's direction vector)
-            L = dl.direction.mul(-1).normalize();
+    if (light instanceof DirectionalLight dl) {
+            L = dl.direction.normalize(); 
         } else {
             // Point light: direction is from hit point to light origin
             PointLight pl = (PointLight) light;
@@ -111,8 +114,8 @@ public class Intersection {
 
         // Get the normalized light direction vector L (from point to light source)
         Vector L = (light instanceof DirectionalLight dl)
-                ? dl.direction.mul(-1).normalize()
-                : ((PointLight) light).origin.sub(point).normalize();
+                    ? dl.direction.normalize() 
+                    : ((PointLight) light).origin.sub(point).normalize();
 
         // Calculate Lambert's cosine law: max(0, N dot L)
         double dot = Math.max(0, normal.dot(L));
@@ -134,8 +137,8 @@ public class Intersection {
 
         // Get the normalized light direction vector L (from point to light source)
         Vector L = (light instanceof DirectionalLight dl)
-                ? dl.direction.mul(-1).normalize()
-                : ((PointLight) light).origin.sub(point).normalize();
+                    ? dl.direction.normalize() 
+                    : ((PointLight) light).origin.sub(point).normalize();
 
         // View vector V: points from the hit point back to the camera (inverse of the incoming ray direction)
         Vector V = incomingRay.direction.mul(-1).normalize();
@@ -160,34 +163,62 @@ public class Intersection {
      * @param scene The scene to access all light sources.
      * @return The final illuminated Color (excluding Ambient).
      */
-    public Color shade(Scene scene) {
+    public Color shade(Scene scene, int depth) {
 
-        Color col = new Color(0,0,0);
+        Color col = new Color(0, 0, 0);
 
-        // Iterate over every light source in the scene
+        // ---------- AMBIENT ----------
+        col.x += scene.ambient.x * shape.diffuse.x;
+        col.y += scene.ambient.y * shape.diffuse.y;
+        col.z += scene.ambient.z * shape.diffuse.z;
+
+        // ---------- DIRECT LIGHTING ----------
         for (Light light : scene.lights) {
 
-            // Skip the light if the point is in shadow relative to it
             if (isShadowed(scene, light))
                 continue;
 
-            // Calculate and accumulate Diffuse component
-            // Optimization: Skip diffuse calculation if the shape's diffuse color is black
-            if (shape.diffuse.x > 0 || shape.diffuse.y > 0 || shape.diffuse.z > 0) {
+            // diffuse
+            if (!shape.diffuse.isBlack()) {
                 Color d = diffuse(light);
-                col.x += d.x;
-                col.y += d.y;
-                col.z += d.z;
+                col.addLocal(d);
             }
 
-            // Calculate and accumulate Specular component
-            // (Note: Specular highlights usually apply regardless of diffuse color)
-            Color sp = specularPhong(light);
-            col.x += sp.x;
-            col.y += sp.y;
-            col.z += sp.z;
+            // specular
+            Color s = specularPhong(light);
+            col.addLocal(s);
+        }
+
+        // ---------- REFLECTION ----------
+        if (depth < scene.maxdepth && !shape.specular.isBlack() && scene.maxdepth > 1) {
+
+            Vector r = computeReflectionDirection();
+
+            Ray reflected = new Ray(
+                    point.add(normal.mul(1e-4)),
+                    r
+            );
+
+            var hit = scene.closestIntersection(reflected);
+
+            if (hit.isPresent()) {
+                Color reflectedColor = hit.get().shade(scene, depth + 1);
+
+                col.x += reflectedColor.x * shape.specular.x;
+                col.y += reflectedColor.y * shape.specular.y;
+                col.z += reflectedColor.z * shape.specular.z;
+            }
         }
 
         return col;
+    }
+
+
+    private Vector computeReflectionDirection() {
+        Vector d = incomingRay.direction.normalize();
+        Vector n = normal.normalize();
+        // r = d + 2 * (n ⋅ (-d)) * n
+        double k = 2 * n.dot(d.mul(-1));
+        return d.add(n.mul(k)).normalize();
     }
 }
