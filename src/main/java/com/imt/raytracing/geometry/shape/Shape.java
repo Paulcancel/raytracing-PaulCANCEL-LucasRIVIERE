@@ -6,7 +6,6 @@ import com.imt.raytracing.imaging.Color;
 import com.imt.raytracing.raytracer.Ray;
 import com.imt.raytracing.raytracer.scene.Intersection;
 
-import lombok.AllArgsConstructor;
 
 /**
  * Base class for geometric shapes in the raytracer.
@@ -14,7 +13,6 @@ import lombok.AllArgsConstructor;
  * Provides common material properties (diffuse, specular, shininess)
  * and a default intersect method that can be overridden by concrete shapes.
  */
-@AllArgsConstructor
 public class Shape {
     /**
      * Diffuse color of the surface.
@@ -31,6 +29,16 @@ public class Shape {
      */
     public double shininess;
     
+    
+
+    public Shape(Color diffuse, Color specular, double shininess) {
+        this.diffuse = diffuse;
+        this.specular = specular;
+        this.shininess = shininess;
+    }
+
+
+
     /**
      * Compute intersection of the given ray with this shape.
      *

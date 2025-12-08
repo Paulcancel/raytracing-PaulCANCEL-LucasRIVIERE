@@ -12,17 +12,11 @@ import com.imt.raytracing.raytracer.Camera;
 import com.imt.raytracing.raytracer.Ray;
 import com.imt.raytracing.raytracer.light.Light;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * Represents the entire 3D environment to be rendered.
  * It holds the camera, image settings, global lighting, and all geometric objects (shapes).
  */
-@Getter
-@Setter
-@NoArgsConstructor
 public class Scene {
     // --- Image Settings ---
     public int width;
@@ -44,6 +38,53 @@ public class Scene {
     public Scene(int width, int height) {
         this.width = width;
         this.height = height;
+    }
+
+    public Scene() {
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public Camera getCamera() {
+        return camera;
+    }
+
+    public String getOutput() {
+        return output;
+    }
+
+    public int getMaxdepth() {
+        return maxdepth;
+    }
+
+    public Color getAmbient() {
+        return ambient;
+    }
+
+    public List<Light> getLights() {
+        return lights;
+    }
+
+    public List<Shape> getShapes() {
+        return shapes;
+    }
+
+    public List<Point> getVertices() {
+        return vertices;
+    }
+
+    public int getMaxverts() {
+        return maxverts;
+    }
+
+    public void setOutput(String output) {
+        this.output = output;
     }
 
     /**

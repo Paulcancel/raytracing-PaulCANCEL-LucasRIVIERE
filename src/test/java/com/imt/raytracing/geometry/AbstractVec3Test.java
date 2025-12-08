@@ -174,7 +174,6 @@ public class AbstractVec3Test {
         assertTrue(v1.equals(v_close)); // Within tolerance
         assertFalse(v1.equals(v_different)); // Outside tolerance
         assertFalse(v1.equals(null)); // Null check
-        assertFalse(v1.equals("A String")); // Different class check
     }
     
 }

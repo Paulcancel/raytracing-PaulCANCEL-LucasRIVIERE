@@ -1,15 +1,11 @@
 package com.imt.raytracing.geometry;
 
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Represents a Vector in 3D space.
  * A Vector has both magnitude (length) and direction, but no fixed position.
  * It provides common vector operations necessary for ray tracing.
  */
-@Getter
-@Setter
 public class Vector {
     // The components of the vector.
     public double x, y, z;
@@ -22,6 +18,18 @@ public class Vector {
      */
     public Vector(double x, double y, double z) {
         this.x = x; this.y = y; this.z = z;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
     }
 
     /**

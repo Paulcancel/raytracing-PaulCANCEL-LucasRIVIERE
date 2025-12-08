@@ -9,7 +9,7 @@ import com.imt.raytracing.imaging.Color;
 
 /**
  * Unit tests for the Light base class, verifying correct initialization 
- * of the color/intensity property via the AllArgsConstructor provided by Lombok.
+ * of the color/intensity property.
  */
 public class LightTest {
 

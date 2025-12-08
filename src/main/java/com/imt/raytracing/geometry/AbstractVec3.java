@@ -1,6 +1,5 @@
 package com.imt.raytracing.geometry;
 
-import lombok.Getter;
 
 /**
  * Base abstract class representing a 3D vector or point.
@@ -11,9 +10,7 @@ import lombok.Getter;
  * the {@link #create(double, double, double)} method to return an instance
  * of their own type.
  */
-@Getter
 public abstract class AbstractVec3 {
-
     /** X coordinate or component. */
     public double x;
     /** Y coordinate or component. */
