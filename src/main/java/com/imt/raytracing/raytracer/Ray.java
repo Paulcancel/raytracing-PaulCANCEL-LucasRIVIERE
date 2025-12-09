@@ -23,7 +23,6 @@ public class Ray {
      */
     public Ray(Point origin, Vector direction) {
         this.origin = origin;
-        // Ensure the direction vector is a unit vector for correct ray parametrization.
         this.direction = direction.normalize();
     }
 }

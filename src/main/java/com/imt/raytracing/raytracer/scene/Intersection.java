@@ -41,20 +41,15 @@ public class Intersection {
         this.shape = shape;
         this.incomingRay = incomingRay;
 
-        // Calculate the impact point P = Ray_Origin + t * Ray_Direction
         this.point = incomingRay.origin.add(incomingRay.direction.mul(t));
 
-        // Calculate the normal vector based on the type of shape hit
         if (shape instanceof Sphere s) {
-            // Sphere normal points from the center to the hit point
             this.normal = point.sub(s.center).normalize();
         }
         else if (shape instanceof Triangle tri) {
-            // Triangle normal is the pre-calculated, constant surface normal
             this.normal = tri.normal; 
         }
         else if (shape instanceof Plane pl) {
-            // Plane normal is the pre-calculated, constant surface normal
             this.normal = pl.normal;  
         }
         else {
@@ -74,16 +69,14 @@ public class Intersection {
      */
     public boolean isShadowed(Scene scene, Light light) {
 
-        Vector L; // Vector pointing *to* the light source
+        Vector L; 
         double maxDist = Double.POSITIVE_INFINITY;
 
     if (light instanceof DirectionalLight dl) {
             L = dl.direction.normalize(); 
         } else {
-            // Point light: direction is from hit point to light origin
             PointLight pl = (PointLight) light;
             L = pl.origin.sub(point).normalize();
-            // Max distance is the actual distance to the point light source
             maxDist = pl.origin.sub(point).length();
         }
 
@@ -94,14 +87,11 @@ public class Intersection {
                 L
         );
 
-        // Check for the closest intersection along the shadow ray
         var hit = scene.closestIntersection(shadowRay);
 
         if (hit.isEmpty())
             return false; // No object hit between the point and the light (or infinity for directional light)
 
-        // The point is shadowed if an object is hit and that object is closer than the point light source (maxDist)
-        // For directional lights, maxDist is infinity, so any hit blocks the light.
         return hit.get().t < maxDist;
     }
 
@@ -111,16 +101,12 @@ public class Intersection {
      * @return The calculated diffuse Color component.
      */
     protected Color diffuse(Light light) {
-
-        // Get the normalized light direction vector L (from point to light source)
         Vector L = (light instanceof DirectionalLight dl)
                     ? dl.direction.normalize() 
                     : ((PointLight) light).origin.sub(point).normalize();
 
-        // Calculate Lambert's cosine law: max(0, N dot L)
         double dot = Math.max(0, normal.dot(L));
 
-        // Multiply dot product by light color and shape's diffuse color component-wise
         return new Color(
                 dot * light.color.x * shape.diffuse.x,
                 dot * light.color.y * shape.diffuse.y,
@@ -135,12 +121,11 @@ public class Intersection {
      */
     protected Color specularPhong(Light light) {
 
-        // Get the normalized light direction vector L (from point to light source)
         Vector L = (light instanceof DirectionalLight dl)
                     ? dl.direction.normalize() 
                     : ((PointLight) light).origin.sub(point).normalize();
 
-        // View vector V: points from the hit point back to the camera (inverse of the incoming ray direction)
+        // View vector V: points from the hit point back to the camera 
         Vector V = incomingRay.direction.mul(-1).normalize();
         
         // Half-vector H: the halfway vector between L and V
@@ -150,7 +135,6 @@ public class Intersection {
         double dot = Math.max(0, normal.dot(H));
         double p = Math.pow(dot, shape.shininess);
 
-        // Multiply power by light color and shape's specular color component-wise
         return new Color(
                 p * light.color.x * shape.specular.x,
                 p * light.color.y * shape.specular.y,

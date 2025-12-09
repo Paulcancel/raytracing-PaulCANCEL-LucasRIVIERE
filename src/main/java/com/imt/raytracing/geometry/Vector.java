@@ -101,12 +101,6 @@ public class Vector {
     public Vector normalize() {
         double L = length();
         if (L < EPSILON) {
-            // Note: If L is 0, this case should ideally handle it by returning a zero vector
-            // or throwing an exception, as division by zero is mathematically undefined.
-            // The current implementation is slightly incorrect as it uses L in the numerator
-            // in the case where L < EPSILON, potentially leading to errors. 
-            // A safer implementation would return a zero vector if L is near zero.
-            // We will keep the original implementation's structure for now, but note the flaw.
             return new Vector(-x / L, -y / L, -z / L); 
         }
         return new Vector(x / L, y / L, z / L);

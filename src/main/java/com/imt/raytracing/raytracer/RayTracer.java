@@ -30,8 +30,6 @@ public class RayTracer {
         // Convert the camera's field of view (FOV) from degrees to radians
         double fovr = Math.toRadians(scene.camera.fov);
         
-        // Calculate half the height of the virtual image plane at distance 1
-        // (tan(fov/2) is the height of the half-angle triangle)
         double pixelH = Math.tan(fovr / 2);
         
         // Calculate half the width of the virtual image plane, adjusted for aspect ratio

@@ -24,7 +24,6 @@ public class Main {
 
         // 1. Parse the scene file
         SceneFileParser parser = new SceneFileParser();
-        // The scene file path is expected as the first argument (e.g., java -jar raytracer.jar myscene.txt)
         Scene scene = parser.parse(args[0]);
 
         // 2. Render the scene

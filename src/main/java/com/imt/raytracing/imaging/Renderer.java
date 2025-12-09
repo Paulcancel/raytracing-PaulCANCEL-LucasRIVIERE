@@ -42,9 +42,6 @@ public class Renderer {
                 Color c = rt.getPixelColor(i, j, scene, basis);
                 
                 // Set the pixel color in the image buffer.
-                // The j-index is inverted (scene.getHeight() - j - 1) because 
-                // ray tracers often use the bottom-left corner as (0, 0), 
-                // while BufferedImage uses the top-left corner as (0, 0).
                 img.setRGB(i, scene.getHeight() - j - 1, c.toRGB());
             }
         }

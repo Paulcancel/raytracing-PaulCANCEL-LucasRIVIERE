@@ -47,7 +47,6 @@ public class Triangle extends Shape {
         this.c = c;
 
 
-        // Normale pré-calculée
         this.normal = b.sub(a).cross(c.sub(a)).normalize();
     }
 
@@ -63,14 +62,12 @@ public class Triangle extends Shape {
     @Override
     public Optional<Intersection> intersect(Ray ray) {
 
-        // Möller–Trumbore
         Vector ab = b.sub(a);
         Vector ac = c.sub(a);
 
         Vector pvec = ray.direction.cross(ac);
         double det = ab.dot(pvec);
 
-        // Si dét proche de 0 → triangle parallèle au rayon
         if (Math.abs(det) < 1e-8) return Optional.empty();
 
         double invDet = 1.0 / det;
@@ -89,12 +86,11 @@ public class Triangle extends Shape {
         return Optional.of(new IntersectionTriangle(t, this, ray));
     }
 
-    /** Intersection spécifique qui fournit la normale du triangle */
     public static class IntersectionTriangle extends Intersection {
 
         public IntersectionTriangle(double t, Triangle tri, Ray ray) {
             super(t, tri, ray);
-            this.normal = tri.normal; // Normale constante
+            this.normal = tri.normal; 
         }
     }
 }

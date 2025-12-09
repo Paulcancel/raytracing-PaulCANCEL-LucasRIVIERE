@@ -63,7 +63,6 @@ public class Plane extends Shape {
 
         double denom = normal.dot(ray.direction);
 
-        // Si denom ≈ 0 : rayon parallèle → pas d'intersection
         if (Math.abs(denom) < 1e-8) return Optional.empty();
 
         double t = p0.sub(ray.origin).dot(normal) / denom;

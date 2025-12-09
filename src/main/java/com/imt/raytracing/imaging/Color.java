@@ -56,12 +56,10 @@ public class Color extends AbstractVec3 {
      * @return The integer representation of the color (AARRGGBB format, where AA is 00).
      */
     public int toRGB() {
-        // Clamp and scale the double components to 0-255 integers
         int red = (int) Math.round(Math.min(1, Math.max(0, x)) * 255);
         int green = (int) Math.round(Math.min(1, Math.max(0, y)) * 255);
         int blue = (int) Math.round(Math.min(1, Math.max(0, z)) * 255);
 
-        // Combine the 8-bit components into a single 32-bit integer (AARRGGBB, where AA is 00)
         return ((red & 0xff) << 16)
              + ((green & 0xff) << 8)
              + (blue & 0xff);

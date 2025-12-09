@@ -18,21 +18,18 @@ import com.imt.raytracing.raytracer.light.Light;
  * It holds the camera, image settings, global lighting, and all geometric objects (shapes).
  */
 public class Scene {
-    // --- Image Settings ---
     public int width;
     public int height;
     public Camera camera;
-    public String output = "img/jalon3/output.png";
+    public String output;
     public int maxdepth = 1;
     
-    // --- Lighting & Geometry ---
     public Color ambient = new Color();
     public List<Light> lights = new ArrayList<>();
     public List<Shape> shapes = new ArrayList<>();
     
-    // --- Vertex Data for Meshes ---
     public List<Point> vertices = new ArrayList<>();
-    public int maxverts = 0; // Maximum number of vertices allowed for meshes
+    public int maxverts = 0; 
 
 
     public Scene(int width, int height) {

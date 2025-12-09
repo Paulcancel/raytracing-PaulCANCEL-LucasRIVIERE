@@ -9,7 +9,7 @@ import com.imt.raytracing.imaging.Color;
  * exact same direction across the entire scene, like the sun.
  */
 public class DirectionalLight extends Light {
-    /** The direction vector indicating where the light is coming **from** (or pointing **to**). 
+    /** The direction vector indicating where the light is coming from or pointing to. 
      * In ray tracing, this vector is usually normalized (unit length).
      */
     public Vector direction;
