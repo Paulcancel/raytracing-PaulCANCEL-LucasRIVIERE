@@ -51,7 +51,6 @@ public class SceneFileParserTest {
         }
     }
 
-    // --- Basic Scene Setup Commands Tests ---
 
     @Test
     void testParse_SizeOutputAndAmbient() throws Exception {
@@ -77,7 +76,7 @@ public class SceneFileParserTest {
     @Test
     void testParse_CameraDefinition() throws Exception {
         String content = 
-            "camera 0 0 5 0 0 0 0 1 0 60.0"; // lookFrom, lookAt, up, fov
+            "camera 0 0 5 0 0 0 0 1 0 60.0"; 
 
         writeSceneContent(content);
         Scene scene = parser.parse(tempFile.toString());
@@ -97,12 +96,11 @@ public class SceneFileParserTest {
         assertEquals(60.0, scene.camera.fov, EPSILON);
     }
 
-    // --- Light Source Commands Tests ---
 
     @Test
     void testParse_DirectionalLight() throws Exception {
         String content = 
-            "directional 1 0 0 0.8 0.8 0.8"; // direction, color
+            "directional 1 0 0 0.8 0.8 0.8"; 
 
         writeSceneContent(content);
         Scene scene = parser.parse(tempFile.toString());
@@ -122,7 +120,7 @@ public class SceneFileParserTest {
     @Test
     void testParse_PointLight() throws Exception {
         String content = 
-            "point 10 20 30 0.5 0.5 0.5"; // position, color
+            "point 10 20 30 0.5 0.5 0.5"; 
 
         writeSceneContent(content);
         Scene scene = parser.parse(tempFile.toString());
@@ -139,7 +137,6 @@ public class SceneFileParserTest {
         assertEquals(0.5, pl.color.x, EPSILON);
     }
     
-    // --- Material State and Shape Commands Tests ---
 
     @Test
     void testParse_MaterialStateAndSphere() throws Exception {
@@ -147,7 +144,7 @@ public class SceneFileParserTest {
             "diffuse 1.0 0.0 0.0\n" +
             "specular 0.5 0.5 0.5\n" +
             "shininess 100.0\n" +
-            "sphere 0 0 0 1.0"; // center, radius
+            "sphere 0 0 0 1.0"; 
 
         writeSceneContent(content);
         Scene scene = parser.parse(tempFile.toString());
@@ -170,7 +167,7 @@ public class SceneFileParserTest {
     @Test
     void testParse_Plane() throws Exception {
         String content = 
-            "plane 0 0 0 0 1 0\n"; // point on plane, normal vector
+            "plane 0 0 0 0 1 0\n"; 
 
         writeSceneContent(content);
         Scene scene = parser.parse(tempFile.toString());
@@ -182,7 +179,6 @@ public class SceneFileParserTest {
         assertEquals(1.0, p.normal.y, EPSILON);
     }
     
-    // --- Vertex and Triangle Commands Tests ---
 
     @Test
     void testParse_VertexAndTriangle() throws Exception {
@@ -225,8 +221,6 @@ public class SceneFileParserTest {
         Scene scene = parser.parse(tempFile.toString());
         
         assertEquals(10, scene.width);
-        // We cannot check the console output, but we verify the parsing completed successfully
-        // and the last valid instruction ('ambient') was processed.
         assertEquals(0.0, scene.ambient.x);
     }
 }

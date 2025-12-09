@@ -37,7 +37,6 @@ public class SphereTest {
         sphere = new Sphere(center, radius, diffuse, specular, shininess);
     }
 
-    // --- Intersection Tests: Valid Hits (t > 0) ---
 
     @Test
     void testIntersection_TwoHitsClosestIsFront() {
@@ -55,7 +54,6 @@ public class SphereTest {
         double expected_t = 5.0;
         assertEquals(expected_t, inter.get().t, 1e-9, "The closest t value should be 5.0.");
         
-        // Check hit point
         Point hitPoint = inter.get().point;
         assertEquals(0.0, hitPoint.x, 1e-9);
         assertEquals(0.0, hitPoint.y, 1e-9);
@@ -78,7 +76,6 @@ public class SphereTest {
         double expected_t = 5.0;
         assertEquals(expected_t, inter.get().t, 1e-9, "The closest t value should be 5.0 (exit point).");
         
-        // Check hit point
         Point hitPoint = inter.get().point;
         assertEquals(0.0, hitPoint.x, 1e-9);
         assertEquals(0.0, hitPoint.y, 1e-9);
@@ -98,14 +95,12 @@ public class SphereTest {
         double expected_t = 5.0;
         assertEquals(expected_t, inter.get().t, 1e-9, "The t value should be 5.0.");
         
-        // Check hit point
         Point hitPoint = inter.get().point;
         assertEquals(5.0, hitPoint.x, 1e-9);
         assertEquals(0.0, hitPoint.y, 1e-9);
         assertEquals(0.0, hitPoint.z, 1e-9);
     }
     
-    // --- Intersection Tests: Misses (t <= 0 or delta < 0) ---
 
     @Test
     void testIntersection_Missed() {

@@ -40,23 +40,9 @@ public class TriangleTest {
         triangle = new Triangle(a, b, c, diffuse, specular, shininess);
     }
 
-    // --- Constructor and Normal Test ---
 
     @Test
     void testTriangleConstructionAndNormal() {
-        // Normal should be calculated as (B-A) x (C-A) and normalized.
-        // B-A = (10, 0, 0)
-        // C-A = (5, 0, 10)
-        // (B-A) x (C-A) = (0*10 - 0*0, 0*5 - 10*10, 10*0 - 0*5) = (0, -100, 0) -> this is incorrect based on expected Y-up.
-        // Let's recheck the cross product:
-        // (B-A) = (10, 0, 0)
-        // (C-A) = (5, 0, 10)
-        // Cross Product: (y1*z2 - z1*y2, z1*x2 - x1*z2, x1*y2 - y1*x2)
-        // (0*10 - 0*0, 0*5 - 10*10, 10*0 - 0*5) = (0, -100, 0)
-        
-        // Since B-A x C-A = (0, -100, 0), the normal points down (-Y). This implies the vertices 
-        // A, B, C are in clockwise order when viewed from the +Y side.
-        
         // The normalized normal should be (0, -1, 0).
         assertEquals(0.0, triangle.normal.x, 1e-9);
         assertEquals(-1.0, triangle.normal.y, 1e-9); // Corrected expectation based on calculation
@@ -67,12 +53,9 @@ public class TriangleTest {
         assertEquals(shininess, triangle.shininess, 1e-9);
     }
     
-    // --- Intersection Tests: Valid Hits (t > 0) ---
 
     @Test
     void testIntersection_DirectHit_Center() {
-        // Ray starts above the center of the triangle at (0, 10, 3.333...) and points down.
-        // The centroid of the triangle is at ( ( -5+5+0)/3, 0, (0+0+10)/3 ) = (0, 0, 3.333...)
         double centroid_z = 10.0 / 3.0;
         Ray ray = new Ray(new Point(0, 10, centroid_z), new Vector(0, -1, 0)); 
         
@@ -84,7 +67,6 @@ public class TriangleTest {
         double expected_t = 10.0;
         assertEquals(expected_t, inter.get().t, 1e-9, "t value should be 10.0.");
         
-        // Expected hit point
         Point hitPoint = inter.get().point;
         assertEquals(0.0, hitPoint.x, 1e-9);
         assertEquals(0.0, hitPoint.y, 1e-9);
@@ -109,7 +91,6 @@ public class TriangleTest {
         double expected_t = 1.0;
         assertEquals(expected_t, inter.get().t, 1e-9, "t value should be 1.0.");
         
-        // Expected hit point
         Point hitPoint = inter.get().point;
         assertEquals(1.0, hitPoint.x, 1e-9);
         assertEquals(0.0, hitPoint.y, 1e-9);
@@ -132,7 +113,6 @@ public class TriangleTest {
         assertEquals(0.0, hitPoint.z, 1e-9);
     }
     
-    // --- Intersection Tests: Misses ---
 
     @Test
     void testIntersection_Missed_OutsideBounds() {

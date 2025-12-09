@@ -25,7 +25,6 @@ public class VectorTest {
         zeroVector = new Vector(0, 0, 0);
     }
 
-    // --- Constructor Tests ---
     
     @Test
     void testParameterizedConstructor() {
@@ -34,7 +33,6 @@ public class VectorTest {
         assertEquals(3.0, v1.z, EPSILON);
     }
 
-    // --- Algebraic Operations ---
 
     @Test
     void testAdd() {
@@ -64,7 +62,6 @@ public class VectorTest {
         assertEquals(9.0, result.z, EPSILON);
     }
 
-    // --- Geometric Operations ---
 
     @Test
     void testDotProduct() {
@@ -93,7 +90,6 @@ public class VectorTest {
         assertEquals(0.0, crossResult.dot(v2), EPSILON, "Cross product result must be orthogonal to v2.");
     }
 
-    // --- Length and Normalization ---
 
     @Test
     void testLength() {
@@ -110,12 +106,10 @@ public class VectorTest {
         double len = Math.sqrt(14.0);
         Vector result = v1.normalize();
         
-        // Components scaled by 1/length
         assertEquals(1.0 / len, result.x, EPSILON);
         assertEquals(2.0 / len, result.y, EPSILON);
         assertEquals(3.0 / len, result.z, EPSILON);
         
-        // Result must have unit length
         assertEquals(1.0, result.length(), EPSILON);
     }
 }

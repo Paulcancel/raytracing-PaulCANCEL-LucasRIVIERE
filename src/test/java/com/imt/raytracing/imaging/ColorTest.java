@@ -17,7 +17,6 @@ public class ColorTest {
     private Color cHigh;
     private Color cLow;
     
-    // Tolerance for floating-point comparisons
     private static final double EPSILON = AbstractVec3.EPSILON;
 
     @BeforeEach
@@ -30,7 +29,6 @@ public class ColorTest {
         cLow = new Color(-0.1, 0.5, -0.9);
     }
 
-    // --- Constructor & Inheritance Tests ---
     
     @Test
     void testDefaultConstructor() {
@@ -48,7 +46,6 @@ public class ColorTest {
         assertTrue(result instanceof Color, "Inherited operations must return a Color instance.");
     }
     
-    // --- Clamping Tests ---
 
     @Test
     void testClamp_NormalColor() {
@@ -77,7 +74,6 @@ public class ColorTest {
         assertEquals(0.0, result.z, EPSILON);
     }
 
-    // --- toRGB Conversion Tests ---
 
     @Test
     void testToRGB_NormalColor() {

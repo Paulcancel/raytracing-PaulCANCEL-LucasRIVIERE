@@ -18,7 +18,6 @@ public class LightTest {
 
     @BeforeEach
     void setUp() {
-        // Define a test color (e.g., bright white light)
         testColor = new Color(1.0, 1.0, 1.0);
     }
 
@@ -42,7 +41,6 @@ public class LightTest {
         Color blackColor = new Color(0, 0, 0);
         Light light = new Light(blackColor);
         
-        // Verify the light is black
         assertEquals(0.0, light.color.x, EPSILON);
         assertEquals(0.0, light.color.y, EPSILON);
     }

@@ -47,7 +47,6 @@ class TestScene extends Scene {
 
     @Override
     public Optional<Intersection> closestIntersection(Ray ray) {
-        // Return the predefined result for shadow rays
         return shadowHit;
     }
 }
@@ -84,7 +83,6 @@ public class IntersectionTest {
         scene.shapes.add(sphere);
     }
 
-    // --- Constructor Tests ---
 
     @Test
     void testIntersectionConstruction_SphereNormal() {
@@ -103,19 +101,16 @@ public class IntersectionTest {
         Point tb = new Point(1, 0, 0);
         Point tc = new Point(0, 0, 1);
         
-        // The Triangle constructor calculates normal = (B-A) x (C-A). 
         // (1, 0, 0) x (0, 0, 1) = (0, -1, 0).
         triangle = new Triangle(ta, tb, tc, diffuseRed, specularWhite, 50.0); 
         
         // Ray hits the triangle at t=10.0 (Point: (0, 0, 0))
         Intersection triInter = new Intersection(10.0, triangle, incomingRay); 
 
-        // Triangle Normal should use the precomputed normal
         assertEquals(0.0, triInter.normal.x, EPSILON);
         assertEquals(-1.0, triInter.normal.y, EPSILON);
     }
 
-    // --- Shadow Tests (isShadowed) ---
 
     @Test
     void testIsShadowed_DirectionalLight_NoBlocker() {
@@ -179,7 +174,6 @@ public class IntersectionTest {
         assertFalse(intersection.isShadowed(scene, light), "Should NOT be shadowed when blocker is farther than point light.");
     }
 
-    // --- Shading Tests (Diffuse & Specular) ---
 
     @Test
     void testDiffuse_FacingLight() {
@@ -189,7 +183,6 @@ public class IntersectionTest {
         // Normal N is (0, 0, 1). N dot L = 1.0 (max brightness)
         double expectedDot = 1.0;
         
-        // Final Color = (N dot L) * LightColor * DiffuseColor
         // Result = 1.0 * (1, 1, 1) * (1, 0, 0) = (1, 0, 0)
         Color result = intersection.diffuse(light);
         

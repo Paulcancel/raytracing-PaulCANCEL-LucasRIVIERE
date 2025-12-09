@@ -32,7 +32,6 @@ public class AbstractVec3Test {
     private ConcreteVec3 v2;
     private ConcreteVec3 zero;
     
-    // Tolerance for floating-point comparisons
     private static final double EPSILON = AbstractVec3.EPSILON;
 
     @BeforeEach
@@ -42,8 +41,6 @@ public class AbstractVec3Test {
         v2 = new ConcreteVec3(4.0, -1.0, 2.5);
         zero = new ConcreteVec3(0, 0, 0);
     }
-
-    // --- Constructor Tests ---
     
     @Test
     void testDefaultConstructor() {
@@ -59,8 +56,6 @@ public class AbstractVec3Test {
         assertEquals(3.0, v1.z, EPSILON);
     }
     
-    // --- Vector Arithmetic Tests ---
-
     @Test
     void testAdd() {
         // (1, 2, 3) + (4, -1, 2.5) = (5, 1, 5.5)
@@ -99,7 +94,6 @@ public class AbstractVec3Test {
         assertEquals(7.5, result.z, EPSILON);
     }
 
-    // --- Geometric Tests ---
 
     @Test
     void testDotProduct() {
@@ -149,7 +143,6 @@ public class AbstractVec3Test {
         assertEquals(2.0 / len, result.y, EPSILON);
         assertEquals(3.0 / len, result.z, EPSILON);
         
-        // The result should have unit length
         assertEquals(1.0, result.length(), EPSILON);
     }
 
@@ -162,7 +155,6 @@ public class AbstractVec3Test {
         assertEquals(0.0, result.z, EPSILON);
     }
 
-    // --- Utility Tests ---
     
     @Test
     void testEquals() {

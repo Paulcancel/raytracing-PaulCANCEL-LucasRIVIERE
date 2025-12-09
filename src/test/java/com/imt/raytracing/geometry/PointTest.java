@@ -28,7 +28,6 @@ public class PointTest {
         v1 = new Vector(2.0, -1.0, 0.5);
     }
 
-    // --- Constructor Tests ---
     
     @Test
     void testDefaultConstructor() {
@@ -45,7 +44,6 @@ public class PointTest {
         assertEquals(3.0, p1.z, EPSILON);
     }
 
-    // --- Affine Algebra Operations ---
 
     @Test
     void testSub_PointMinusPoint_ReturnsVector() {
@@ -73,10 +71,6 @@ public class PointTest {
         assertTrue(result instanceof Point, "P1 + V1 must return a Point.");
     }
     
-    // --- Inheritance Tests (Delegation to AbstractVec3) ---
-    
-    // The 'create' method ensures that even inherited operations like 'mul' 
-    // correctly return a new Point instance if applied to a Point.
 
     @Test
     void testInheritedMul_ReturnsPoint() {
@@ -87,7 +81,6 @@ public class PointTest {
         assertEquals(20.0, result.y, EPSILON);
         assertEquals(6.0, result.z, EPSILON);
         
-        // Point's 'create' method must ensure the returned type is Point
         assertTrue(result instanceof Point, "Inherited operations on Point must return a Point.");
     }
 }

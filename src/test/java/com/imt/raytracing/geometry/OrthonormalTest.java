@@ -109,11 +109,9 @@ public class OrthonormalTest {
     @Test
     void testOrthonormalBasis_UpVectorNotPerpendicular() {
         // Case where 'up' vector is not perpendicular to the view direction (LookFrom - LookAt).
-        // W calculation should correct this automatically via the cross product.
         
         Point lookFrom = new Point(0, 0, 10);
         Point lookAt = new Point(0, 0, 0);
-        // Up vector is slightly tilted: (0.5, 1, 0)
         Vector upTilted = new Vector(0.5, 1, 0);
 
         Orthonormal basis = new Orthonormal(lookFrom, lookAt, upTilted);

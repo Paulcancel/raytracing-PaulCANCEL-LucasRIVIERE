@@ -36,7 +36,6 @@ public class PlaneTest {
         plane = new Plane(p0, normal, diffuse, specular, shininess);
     }
 
-    // --- Constructor and Material Tests ---
 
     @Test
     void testPlaneConstructionAndNormalization() {
@@ -50,7 +49,6 @@ public class PlaneTest {
         assertEquals(0.0, testPlane.normal.z, 1e-9);
     }
 
-    // --- Intersection Tests: Standard Hits ---
 
     @Test
     void testIntersection_DirectHit() {
@@ -78,8 +76,6 @@ public class PlaneTest {
         assertEquals(plane.normal.z, inter.get().normal.z, 1e-9);
     }
 
-
-    // --- Intersection Tests: Misses ---
 
     @Test
     void testIntersection_ParallelRay_OnPlane() {
@@ -130,8 +126,6 @@ public class PlaneTest {
         
         Optional<Intersection> inter = plane.intersect(ray);
 
-        // Numerator > 0, Denominator > 0, but the plane is behind the ray if normal.dot(ray.direction) > 0.
-        // The analytic solution handles the direction implicitly, and t will be negative here.
         assertFalse(inter.isPresent(), "Ray pointing away from the plane should not hit.");
     }
 }

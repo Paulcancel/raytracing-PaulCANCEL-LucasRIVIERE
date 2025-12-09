@@ -20,9 +20,7 @@ public class PointLightTest {
 
     @BeforeEach
     void setUp() {
-        // Define a test color (e.g., yellow light)
         testColor = new Color(1.0, 1.0, 0.0);
-        // Define a test position for the light source
         testOrigin = new Point(10.0, 5.0, -2.0);
     }
 
@@ -46,7 +44,6 @@ public class PointLightTest {
         Point zeroOrigin = new Point(0, 0, 0);
         PointLight light = new PointLight(zeroOrigin, testColor);
         
-        // Verify the light is at the origin
         assertEquals(0.0, light.origin.x, EPSILON);
         assertEquals(0.0, light.origin.y, EPSILON);
         assertEquals(0.0, light.origin.z, EPSILON);

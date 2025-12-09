@@ -51,8 +51,6 @@ public class DirectionalLightTest {
         assertEquals(10.0, light.direction.length(), EPSILON, 
                      "The vector should retain its original length (10.0) as the constructor does not normalize.");
         
-        // The shading logic (like in Intersection.isShadowed) is responsible for calling normalize() 
-        // when calculating the light ray.
         assertEquals(10.0, light.direction.x, EPSILON);
     }
 }
